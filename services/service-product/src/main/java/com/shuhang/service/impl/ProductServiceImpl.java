@@ -11,6 +11,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(Long productId) {
+        System.out.println(productId);
         Product product = new Product();
         product.setId(productId);
         product.setProductName("iphone " + productId);

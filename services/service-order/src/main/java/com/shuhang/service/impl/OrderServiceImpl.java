@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder(Long productId, Long userId) {
-        Product productData = getRemoteProductDataWithBalance(productId);
+        Product productData = getRemoteProductDataWithBalanceAnnotation(productId);
         // 远程调用获取商品数据
         Order order = new Order();
         order.setId(1L);
@@ -60,6 +60,14 @@ public class OrderServiceImpl implements OrderService {
         // 2. 发送请求
         String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/product/" + productId;
         System.out.println(url);
+        Product product = restTemplate.getForObject(url, Product.class);
+        // 3. 获取响应的数据
+        return product;
+    }
+
+    // 基于注解的负载均衡版本调用商品服务
+    private Product getRemoteProductDataWithBalanceAnnotation(Long productId) {
+        String url = "http://server-product/product/" + productId;
         Product product = restTemplate.getForObject(url, Product.class);
         // 3. 获取响应的数据
         return product;
