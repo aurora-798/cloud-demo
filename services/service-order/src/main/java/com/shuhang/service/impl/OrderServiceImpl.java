@@ -1,5 +1,6 @@
 package com.shuhang.service.impl;
 
+import com.shuhang.feign.BlogAPIFeignClient;
 import com.shuhang.feign.ProductFeignClient;
 import com.shuhang.model.order.Order;
 import com.shuhang.model.product.Product;
@@ -30,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private ProductFeignClient productFeignClient;
 
+    @Resource
+    private BlogAPIFeignClient blogAPIFeignClient;
+
     @Override
     public Order createOrder(Long productId, Long userId) {
 //        Product productData = getRemoteProductDataWithBalanceAnnotation(productId);
@@ -43,6 +47,11 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalAmount(productData.getPrice().multiply(new BigDecimal(productData.getNum())));
         order.setProductList(List.of(productData));
         return order;
+    }
+
+    @Override
+    public String getBlogData() {
+        return blogAPIFeignClient.getBlogData();
     }
 
 

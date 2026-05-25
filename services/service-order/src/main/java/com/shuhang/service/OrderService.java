@@ -5,4 +5,6 @@ import com.shuhang.model.order.Order;
 
 public interface OrderService {
     Order createOrder(Long productId, Long userId);
+
+    String getBlogData();
 }

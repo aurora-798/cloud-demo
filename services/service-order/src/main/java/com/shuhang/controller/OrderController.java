@@ -28,6 +28,11 @@ public class OrderController {
         return orderService.createOrder(productId,userId);
     }
 
+    @GetMapping("/bloginfo")
+    public String getBlogInfo(){
+        return orderService.getBlogData();
+    }
+
 
     @GetMapping("/config")
     public String getOrderConfig() {
