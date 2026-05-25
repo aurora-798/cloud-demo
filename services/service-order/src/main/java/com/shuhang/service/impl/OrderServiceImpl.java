@@ -1,5 +1,6 @@
 package com.shuhang.service.impl;
 
+import com.shuhang.feign.ProductFeignClient;
 import com.shuhang.model.order.Order;
 import com.shuhang.model.product.Product;
 import com.shuhang.service.OrderService;
@@ -26,9 +27,13 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private RestTemplate restTemplate;
 
+    @Resource
+    private ProductFeignClient productFeignClient;
+
     @Override
     public Order createOrder(Long productId, Long userId) {
-        Product productData = getRemoteProductDataWithBalanceAnnotation(productId);
+//        Product productData = getRemoteProductDataWithBalanceAnnotation(productId);
+        Product productData = productFeignClient.getProductById(productId);
         // 远程调用获取商品数据
         Order order = new Order();
         order.setId(1L);
