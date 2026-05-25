@@ -2,7 +2,7 @@ spring:
   application:
     name: server-order
   config:
-    import: nacos:server-order.yml  // 动态加载更新 Nacos 的配置内容
+    import: nacos:server-order.yml
   cloud:
     nacos:
       discovery:

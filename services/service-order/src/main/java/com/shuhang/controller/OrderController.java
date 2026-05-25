@@ -2,6 +2,7 @@ package com.shuhang.controller;
 
 import com.shuhang.model.order.Order;
 import com.shuhang.service.OrderService;
+import com.shuhang.yml.OrderServiceYmlConfig;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Value("${order.timeout}")
-    String timeout;
+    @Resource
+    private OrderServiceYmlConfig orderServiceYmlConfig;
 
     @Resource
     private OrderService orderService;
@@ -30,6 +31,6 @@ public class OrderController {
 
     @GetMapping("/config")
     public String getOrderConfig() {
-        return timeout;
+        return orderServiceYmlConfig.getTimeout();
     }
 }
