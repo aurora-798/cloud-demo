@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>services</module>
+        <module>common</module>
     </modules>
     <groupId>com.shuhang</groupId>
     <artifactId>cloud-demo</artifactId>

@@ -1,7 +1,8 @@
 package com.shuhang.service;
 
-import com.shuhang.model.Order;
+
+import com.shuhang.model.order.Order;
 
 public interface OrderService {
-    Order getOrderById(Long orderId,Long userId);
+    Order createOrder(Long productId, Long userId);
 }

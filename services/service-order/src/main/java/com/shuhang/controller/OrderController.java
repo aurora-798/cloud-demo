@@ -1,6 +1,6 @@
 package com.shuhang.controller;
 
-import com.shuhang.model.Order;
+import com.shuhang.model.order.Order;
 import com.shuhang.service.OrderService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +16,8 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public Order getOrderById(@RequestParam("orderId") Long orderId,
+    public Order create(@RequestParam("productId") Long productId,
                               @RequestParam("userId") Long userId){
-        return orderService.getOrderById(orderId,userId);
+        return orderService.createOrder(productId,userId);
     }
 }

@@ -1,7 +1,7 @@
 package com.shuhang.controller;
 
 
-import com.shuhang.model.Product;
+import com.shuhang.model.product.Product;
 import com.shuhang.service.ProductService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;

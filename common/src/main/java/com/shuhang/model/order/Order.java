@@ -1,4 +1,4 @@
-package com.shuhang.model;
+package com.shuhang.model.order;
 
 import lombok.Data;
 

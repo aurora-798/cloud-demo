@@ -1,6 +1,6 @@
 package com.shuhang.service.impl;
 
-import com.shuhang.model.Product;
+import com.shuhang.model.product.Product;
 import com.shuhang.service.ProductService;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
 package com.shuhang.service;
 
-import com.shuhang.model.Product;
+
+import com.shuhang.model.product.Product;
 
 public interface ProductService {
     Product getProductById(Long productId);
