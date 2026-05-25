@@ -1,13 +1,43 @@
 package com.shuhang;
 
+import com.alibaba.cloud.nacos.NacosConfigManager;
+import com.alibaba.nacos.api.config.ConfigService;
+import com.alibaba.nacos.api.config.listener.Listener;
+import com.alibaba.nacos.api.exception.NacosException;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 @EnableDiscoveryClient  // 开启服务发现功能
 @SpringBootApplication
-public class OrderMainApplication {
+public class OrderMainApplication{
     public static void main(String[] args) {
         SpringApplication.run(OrderMainApplication.class,args);
+    }
+
+
+    // 项目启动时执行一次：监听 Nocus 配置文件变化
+    @Bean
+    ApplicationRunner applicationRunner(NacosConfigManager manager) throws NacosException {
+        return args -> {
+            ConfigService configService = manager.getConfigService();
+            configService.addListener("server-order.yml", "DEFAULT_GROUP",
+                    new Listener() {
+                        @Override
+                        public Executor getExecutor() {
+                            return Executors.newFixedThreadPool(4);
+                        }
+                        @Override
+                        public void receiveConfigInfo(String config) {
+                            System.out.println("configInfg:" + config);
+                        }
+                    });
+        };
     }
 }
